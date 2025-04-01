@@ -28,8 +28,22 @@ import Footer from '../components/footer.astro'
 		
 	</head>
 	<body>
-		<Nav></Nav>
-		<Footer></Footer>
+		<Nav />
+		<slot />
+		<Footer />
+
+		<style>
+			body{
+				background-color: #0e0e0e;
+				font-family: Inter;
+				color: white;
+			}
+
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+		</style>
 	</body>
 </html>
-
