@@ -1,0 +1,284 @@
+---
+import Layout from '../layouts/layout.astro'
+---
+
+<Layout>
+    <style>
+
+
+        body{
+            background-color: black;
+        }
+        
+            #instructores{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2em;
+            }
+        
+            .info-instruc{
+        
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 3em;
+                width: 70%;
+        
+            }
+            .foto-perfil-instruc{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                img{
+        
+                    width: 13em;
+                    height: 13em;
+                    border-radius: 99px;
+                            background-color: blue;
+        
+                }
+                h2{
+                    color: white;
+                    background-color: #5400AD;
+                    padding: 10px;
+                    border-radius: 20px;
+                }
+        
+            }
+        
+            .informacion-instruc{
+                background-color: #5400AD;
+                width: 55%;
+                height: 16em;
+                border-radius: 20px;
+        
+        
+            }
+            .caja-boton{
+                display: flex
+        ;
+            align-items: center;
+            justify-content: flex-end;
+            align-content: flex-end;
+            height: 99%;
+            }
+            #boton-instruc-1,#boton-instruc-2,#boton-instruc-3,#boton-instruc-4,#boton-instruc-5 {
+                display: flex;
+                align-items: center;
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+                    position: relative;
+                    transition: transform 0.5s ease-in-out;
+                    background-color: #5400AD;
+                    border-radius: 20px;
+                    color: white;
+                    padding-right: 10px;
+                    img{
+                        width: 50px;
+                    }
+        
+                }
+            #arrow-1,#arrow-2,#arrow-3,#arrow-4,#arrow-5{
+                transition: transform 0.5s ease-in-out;
+            }
+            .mi-ventana {
+                width: 713px;
+                height: 358px;
+                background-color: lightgray;
+                border-radius: 10px;
+                position: fixed;
+                bottom: -400px; /* Inicialmente la ventana está oculta debajo de la pantalla */
+                left: 50%;
+                transform: translateX(-50%);
+                display: none;
+                padding: 5px;
+                transition: bottom 0.5s ease-in-out; /* Animación suave para aparecer */
+                z-index: 2;
+            video{
+                width: 100%;
+                height: auto;
+                background-color: #5400AD;
+            }
+        }
+        
+        .cerrar-ventana {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        
+        
+        </style>
+        <body>
+        
+            <section id="instructores">
+                <div class="info-instruc">
+                    <div class="foto-perfil-instruc">
+                        <img src="img/elizabeth.svg" alt="Foto Instructora Elizabeth Garzon">
+                        <h2>nombre instructor</h2>
+                    </div>
+                    <div class="informacion-instruc">
+                        <h2>************************</h2>
+                        <p>*************** ***************** ***************</p>
+                        <div class="caja-boton">
+                            <button id="boton-instruc-1" onclick="rotarYMoverBoton(1)">
+                                <img id="arrow-1" src="img/arrow_drop_up.svg">Ver Entrevista
+                            </button> 
+                        </div> 
+            
+                        <div id="mi-ventana-1" class="mi-ventana">
+                            <button class="cerrar-ventana" onclick="cerrarVentana(1)">X</button>
+                            <video  src="">********************</video>
+        
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Repetimos el mismo bloque para los otros instructores con ids únicos -->
+                <div class="info-instruc">
+                    <div class="foto-perfil-instruc">
+                        <img src="" alt="foto instructor">
+                        <h2>nombre instructor</h2>
+                    </div>
+                    <div class="informacion-instruc">
+                        <h2>************************</h2>
+                        <p>*************** ***************** ***************</p>
+                        <div class="caja-boton">
+                            <button id="boton-instruc-2" onclick="rotarYMoverBoton(2)">
+                                <img id="arrow-2" src="img/arrow_drop_up.svg">Ver Entrevista
+                            </button> 
+                        </div> 
+            
+                        <div id="mi-ventana-2" class="mi-ventana">
+                            <button class="cerrar-ventana" onclick="cerrarVentana(2)">X</button>
+                            <video src="">******************</video>
+        
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="info-instruc">
+                    <div class="foto-perfil-instruc">
+                        <img src="" alt="foto instructor">
+                        <h2>nombre instructor</h2>
+                    </div>
+                    <div class="informacion-instruc">
+                        <h2>************************</h2>
+                        <p>*************** ***************** ***************</p>
+                        <div class="caja-boton">
+                            <button id="boton-instruc-3" onclick="rotarYMoverBoton(3)">
+                                <img id="arrow-3" src="img/arrow_drop_up.svg">Ver Entrevista
+                            </button> 
+                        </div> 
+            
+                        <div id="mi-ventana-3" class="mi-ventana">
+                            <button class="cerrar-ventana" onclick="cerrarVentana(3)">X</button>
+                            <video src="">***********</video>
+        
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="info-instruc">
+                    <div class="foto-perfil-instruc">
+                        <img src="" alt="foto instructor">
+                        <h2>nombre instructor</h2>
+                    </div>
+                    <div class="informacion-instruc">
+                        <h2>************************</h2>
+                        <p>*************** ***************** ***************</p>
+                        <div class="caja-boton">
+                            <button id="boton-instruc-4" onclick="rotarYMoverBoton(4)">
+                                <img id="arrow-4" src="img/arrow_drop_up.svg">Ver Entrevista
+                            </button> 
+                        </div> 
+            
+                        <div id="mi-ventana-4" class="mi-ventana">
+                            <button class="cerrar-ventana" onclick="cerrarVentana(4)">X</button>
+                            <video src="">**************************</video>
+        
+                        </div>
+                    </div>
+                </div>
+        
+        
+                <div class="info-instruc">
+                    <div class="foto-perfil-instruc">
+                        <img src="" alt="foto instructor">
+                        <h2>nombre instructor</h2>
+                    </div>
+                    <div class="informacion-instruc">
+                        <h2>************************</h2>
+                        <p>*************** ***************** ***************</p>
+                        <div class="caja-boton">
+                            <button id="boton-instruc-5" onclick="rotarYMoverBoton(5)">
+                                <img id="arrow-5" src="img/arrow_drop_up.svg">Ver Entrevista
+                            </button> 
+                        </div> 
+            
+                        <div id="mi-ventana-5" class="mi-ventana">
+                            <button class="cerrar-ventana" onclick="cerrarVentana(5)">X</button>
+                            <video src="">***********</video>
+        
+                        </div>
+                    </div>
+                </div>
+            
+            </section>
+        </body>
+    </Layout>
+
+        <script>
+        
+        let angulo = 0;
+        let desplazamiento = 0;
+        let ventanaVisible = [false, false]; 
+        
+        function rotarYMoverBoton(indice) {
+    
+            angulo += -180;
+            desplazamiento = desplazamiento === 0 ? 20 : 0; 
+
+            document.getElementById(`arrow-${indice}`).style.transform = `rotate(${angulo}deg)`;
+            document.getElementById(`boton-instruc-${indice}`).style.transform = `translateY(${desplazamiento}px)`;
+
+            if (ventanaVisible[indice - 1]) {
+                ocultarVentana(indice); 
+            } else {
+                mostrarVentana(indice); 
+            }
+        }
+    function mostrarVentana(indice) {
+        const ventana = document.getElementById(`mi-ventana-${indice}`);
+        ventana.style.display = 'block'; 
+        setTimeout(() => {
+            ventana.style.bottom = '50px'; 
+        }, 10);
+    
+        ventanaVisible[indice - 1] = true;
+    }
+    
+    function ocultarVentana(indice) {
+        const ventana = document.getElementById(`mi-ventana-${indice}`);
+        ventana.style.bottom = '-200px';
+        setTimeout(() => {
+            ventana.style.display = 'none';
+        }, 500);
+    
+        ventanaVisible[indice - 1] = false;
+    }
+    
+    function cerrarVentana(indice) {
+        ocultarVentana(indice);
+    }
+    
+    </script>
