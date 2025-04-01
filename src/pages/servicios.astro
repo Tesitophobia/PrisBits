@@ -14,7 +14,7 @@ import Layout from '../layouts/layout.astro'
                 </button> 
             </div> 
     
-            <div id="mi-ventana-1" class="mi-ventana">
+            <div id="mi-ventana-1" class="mi-ventana" data-ventana="1">
                 <button class="cerrar-ventana" data-ventana="1">X</button>
 
                 <div class="fun">
@@ -32,49 +32,143 @@ import Layout from '../layouts/layout.astro'
         </div>
     </section>
 
+    <section class="servi">
+        <div class="informacion-instruc instruc-2">
+            <div>
+                <span class="fond-emp">AgroSENA</span>
+            </div>
+
+            <div class="caja-boton">
+                <button id="boton-instruc-2" data-ventana="2">
+                    <img id="arrow-2" src="assets/arrow_drop_up.svg" alt="flecha">Ver Información
+                </button> 
+            </div> 
+    
+            <div id="mi-ventana-2" class="mi-ventana" data-ventana="2">
+                <button class="cerrar-ventana" data-ventana="2">X</button>
+
+                <div class="fun">
+                    <span><h2>Requisitos</h2></span>
+                    <span></span>
+                </div>
+
+                <div class="pat">
+                    <h2>Beneficios</h2>
+                </div>
+                <div class="pos">
+                    <h2>Proceso de Aplicación</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="servi">
+        <div class="informacion-instruc instruc-3">
+            <div>
+                <span class="fond-emp">SENA Emprende Rural</span>
+            </div>
+
+            <div class="caja-boton">
+                <button id="boton-instruc-3" data-ventana="3">
+                    <img id="arrow-3" src="assets/arrow_drop_up.svg" alt="flecha">Ver Detalles
+                </button> 
+            </div> 
+    
+            <div id="mi-ventana-3" class="mi-ventana" data-ventana="3">
+                <button class="cerrar-ventana" data-ventana="3">X</button>
+
+                <div class="fun">
+                    <span><h2>Programas Disponibles</h2></span>
+                    <span></span>
+                </div>
+
+                <div class="pat">
+                    <h2>Áreas de Formación</h2>
+                </div>
+                <div class="pos">
+                    <h2>Inscripción</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script>
         // Función para rotar y mover el botón
         function rotarYMoverBoton(ventanaId) {
             const arrow = document.getElementById(`arrow-${ventanaId}`);
             const ventana = document.getElementById(`mi-ventana-${ventanaId}`);
-            const currentDisplay = window.getComputedStyle(ventana).display;
             
-            if (currentDisplay !== 'none') {
+            if (ventana.classList.contains('active')) {
+                // Cerrar ventana actual
                 ventana.classList.remove('active');
                 arrow.style.transform = 'rotate(0deg)';
                 setTimeout(() => {
                     ventana.style.display = 'none';
-                }, 500); // Esperar a que termine la animación
+                }, 500);
             } else {
+                // Cerrar otras ventanas primero
+                document.querySelectorAll('.mi-ventana').forEach(v => {
+                    if (v.id !== `mi-ventana-${ventanaId}`) {
+                        v.classList.remove('active');
+                        v.style.display = 'none';
+                    }
+                });
+                document.querySelectorAll('[id^="arrow-"]').forEach(a => {
+                    if (a.id !== `arrow-${ventanaId}`) {
+                        a.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Abrir ventana seleccionada
                 ventana.style.display = 'grid';
-                // Forzar un reflow para que la animación funcione
-                ventana.offsetHeight;
+                ventana.offsetHeight; // Forzar reflow
                 ventana.classList.add('active');
                 arrow.style.transform = 'rotate(180deg)';
             }
         }
 
-        // Función para cerrar la ventana
-        function cerrarVentana(ventanaId) {
-            const ventana = document.getElementById(`mi-ventana-${ventanaId}`);
-            const arrow = document.getElementById(`arrow-${ventanaId}`);
-            ventana.classList.remove('active');
-            arrow.style.transform = 'rotate(0deg)';
-            setTimeout(() => {
-                ventana.style.display = 'none';
-            }, 500);
-        }
-
-        // Agregar event listeners a los botones
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('[data-ventana]').forEach(elemento => {
-                elemento.addEventListener('click', (e) => {
-                    const ventanaId = e.currentTarget.getAttribute('data-ventana');
-                    if (e.currentTarget.classList.contains('cerrar-ventana')) {
-                        cerrarVentana(ventanaId);
-                    } else {
+            // Event listeners para botones
+            document.querySelectorAll('[id^="boton-instruc-"]').forEach(boton => {
+                boton.addEventListener('click', (e) => {
+                    const ventanaId = boton.getAttribute('data-ventana');
+                    rotarYMoverBoton(ventanaId);
+                });
+            });
+
+            // Event listener para botones de cerrar
+            document.querySelectorAll('.cerrar-ventana').forEach(boton => {
+                boton.addEventListener('click', (e) => {
+                    const ventanaId = boton.getAttribute('data-ventana');
+                    rotarYMoverBoton(ventanaId);
+                });
+            });
+
+            // Event listener para Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const ventanaActiva = document.querySelector('.mi-ventana.active');
+                    if (ventanaActiva) {
+                        const ventanaId = ventanaActiva.id.split('-')[2];
                         rotarYMoverBoton(ventanaId);
                     }
+                }
+            });
+
+            // Event listener para clic fuera
+            document.addEventListener('click', (e) => {
+                const ventanaActiva = document.querySelector('.mi-ventana.active');
+                if (ventanaActiva && !ventanaActiva.contains(e.target) && 
+                    !e.target.closest('[id^="boton-instruc-"]')) {
+                    const ventanaId = ventanaActiva.id.split('-')[2];
+                    rotarYMoverBoton(ventanaId);
+                }
+            });
+
+            // Prevenir cierre al hacer clic dentro de la ventana
+            document.querySelectorAll('.mi-ventana').forEach(ventana => {
+                ventana.addEventListener('click', (e) => {
+                    e.stopPropagation();
                 });
             });
         });
@@ -87,7 +181,8 @@ import Layout from '../layouts/layout.astro'
             align-items: center;
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            min-height: 50vh;
+            margin-bottom: 2rem;
             margin-top: 2em;
         }
 
@@ -97,6 +192,14 @@ import Layout from '../layouts/layout.astro'
             min-height: 72vh;
             border-radius: 30px 0px 0px 30px;
             position: relative;
+        }
+
+        .instruc-2 {
+            background-color: #1d65a3;
+        }
+
+        .instruc-3 {
+            background-color: #2a9d8f;
         }
 
         .informacion-instruc > div {
@@ -115,7 +218,15 @@ import Layout from '../layouts/layout.astro'
             background-color: rgb(29, 101, 163);
         }
 
-        #boton-instruc-1 {
+        .instruc-2 .fond-emp {
+            background-color: #5400AD;
+        }
+
+        .instruc-3 .fond-emp {
+            background-color: #1d65a3;
+        }
+
+        [id^="boton-instruc-"] {
             display: flex;
             align-items: center;
             cursor: pointer;
@@ -125,37 +236,29 @@ import Layout from '../layouts/layout.astro'
             font-size: 1em;
             gap: 10px;
             transition: transform 0.3s ease;
-
-            img {
-                width: 50px;
-            }
         }
 
-        #arrow-1 {
+        [id^="boton-instruc-"] img {
+            width: 50px;
             transition: transform 0.5s ease-in-out;
         }
 
         .mi-ventana {
             display: none;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            grid-template-areas: 
-                "fun pat"
-                "fun pos";
-            width: 713px;
-            height: 358px;
-            background-color: #1d1d1d;
-            border: 1px solid #333;
-            border-radius: 10px;
             position: fixed;
-            bottom: -700px;
+            bottom: -100%;
             left: 50%;
             transform: translateX(-50%);
-            padding: 20px;
             opacity: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: bottom 0.5s ease, opacity 0.5s ease;
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
             z-index: 1000;
-            color: white;
+            width: 80%;
+            max-width: 600px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
         }
 
         .mi-ventana.active {
@@ -163,9 +266,9 @@ import Layout from '../layouts/layout.astro'
             opacity: 1;
         }
 
-        .fun { grid-area: fun; }
-        .pat { grid-area: pat; }
-        .pos { grid-area: pos; }
+        [id^="arrow-"] {
+            transition: transform 0.5s ease;
+        }
 
         .cerrar-ventana {
             position: absolute;
