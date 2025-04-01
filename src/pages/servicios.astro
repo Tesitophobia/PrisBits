@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/layout.astro'
+---
+<Layout>
+    <section class="servi">
+        <div class="informacion-instruc">
+            <div>
+                <span class="fond-emp">Fondo Emprender</span>
+            </div>
+
+            <div class="caja-boton">
+                <button id="boton-instruc-1" data-ventana="1">
+                    <img id="arrow-1" src="assets/arrow_drop_up.svg" alt="flecha">Ver Entrevista
+                </button> 
+            </div> 
+    
+            <div id="mi-ventana-1" class="mi-ventana">
+                <button class="cerrar-ventana" data-ventana="1">X</button>
+
+                <div class="fun">
+                    <span><h2>¿Cómo Funciona?</h2></span>
+                    <span></span>
+                </div>
+
+                <div class="pat">
+                    <h2>¿A quien patrocina?</h2>
+                </div>
+                <div class="pos">
+                    <h2>¿Como Postularce?</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Función para rotar y mover el botón
+        function rotarYMoverBoton(ventanaId) {
+            const arrow = document.getElementById(`arrow-${ventanaId}`);
+            const ventana = document.getElementById(`mi-ventana-${ventanaId}`);
+            const currentDisplay = window.getComputedStyle(ventana).display;
+            
+            if (currentDisplay !== 'none') {
+                ventana.classList.remove('active');
+                arrow.style.transform = 'rotate(0deg)';
+                setTimeout(() => {
+                    ventana.style.display = 'none';
+                }, 500); // Esperar a que termine la animación
+            } else {
+                ventana.style.display = 'grid';
+                // Forzar un reflow para que la animación funcione
+                ventana.offsetHeight;
+                ventana.classList.add('active');
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Función para cerrar la ventana
+        function cerrarVentana(ventanaId) {
+            const ventana = document.getElementById(`mi-ventana-${ventanaId}`);
+            const arrow = document.getElementById(`arrow-${ventanaId}`);
+            ventana.classList.remove('active');
+            arrow.style.transform = 'rotate(0deg)';
+            setTimeout(() => {
+                ventana.style.display = 'none';
+            }, 500);
+        }
+
+        // Agregar event listeners a los botones
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-ventana]').forEach(elemento => {
+                elemento.addEventListener('click', (e) => {
+                    const ventanaId = e.currentTarget.getAttribute('data-ventana');
+                    if (e.currentTarget.classList.contains('cerrar-ventana')) {
+                        cerrarVentana(ventanaId);
+                    } else {
+                        rotarYMoverBoton(ventanaId);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .servi {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            margin-top: 2em;
+        }
+
+        .informacion-instruc {
+            background-color: #5400AD;
+            width: 80%;
+            min-height: 72vh;
+            border-radius: 30px 0px 0px 30px;
+            position: relative;
+        }
+
+        .informacion-instruc > div {
+            padding: 4em;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .fond-emp {
+            border-radius: 20px 0 20px 20px;
+            width: 325px;
+            padding-block: 1.5em;
+            padding-left: 3em;
+            color: white;
+            display: flex;
+            background-color: rgb(29, 101, 163);
+        }
+
+        #boton-instruc-1 {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1em;
+            gap: 10px;
+            transition: transform 0.3s ease;
+
+            img {
+                width: 50px;
+            }
+        }
+
+        #arrow-1 {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .mi-ventana {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+                "fun pat"
+                "fun pos";
+            width: 713px;
+            height: 358px;
+            background-color: #1d1d1d;
+            border: 1px solid #333;
+            border-radius: 10px;
+            position: fixed;
+            bottom: -700px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 20px;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            color: white;
+        }
+
+        .mi-ventana.active {
+            bottom: 50px;
+            opacity: 1;
+        }
+
+        .fun { grid-area: fun; }
+        .pat { grid-area: pat; }
+        .pos { grid-area: pos; }
+
+        .cerrar-ventana {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cerrar-ventana:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .caja-boton {
+            margin-top: 20%;
+        }
+
+        h2 {
+            margin: 0;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+        }
+    </style>
+</Layout>
