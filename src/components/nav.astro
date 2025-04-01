@@ -98,6 +98,8 @@
       height: 10vh;
       width: 100%;
       padding-top: 0.5em;
+      margin-top: 1em;
+      z-index: 1000;
     
     }
     .navs{
@@ -105,11 +107,21 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 60em;
+      width: 48%;
       height: 5em;
       border-radius: 1em;
       margin-left: 3em;
       color: white;
+      position: fixed;
+      left: 22.23%;
+      z-index: 1000;
+      background: rgba( 144, 19, 254, 0.4 );
+      box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+      backdrop-filter: blur( 4px );
+      -webkit-backdrop-filter: blur( 4px );
+      @media (width < 850px) {
+        width: 16em;
+      }
     }
     div{
       display: flex;
