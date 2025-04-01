@@ -1,16 +1,18 @@
 ---
-import AstroNav from '../components/nav.astro';
+
 import CubeAstro from '../components/cube.astro';
 import Card from '../components/card.astro'
+import Layout from '../layouts/layout.astro'
 ---
 
 <head>
 	<meta charset="UTF-8">
 </head>
 
-<AstroNav></AstroNav>
-<CubeAstro></CubeAstro>
-<Card></Card>
+<Layout>
+	<CubeAstro></CubeAstro>
+	<Card></Card>
+</Layout>
 
 
 

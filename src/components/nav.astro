@@ -1,16 +1,78 @@
 <nav>
-	<a href="/">
-	<img class="Logo" src="src/assets/ProvisionalLogo.png" alt="Logo Zira">
-	</a>
-	<span>
-		<h2>CDA - SENA CHIA</h2>
-	</span>
-	<div>
-		<img src="src/assets/search.png" alt="Buscador">
-		<img src="src/assets/menu.png" alt="Menú">
-	</div>
+  <a href="/">
+  <img class="Logo" src="/assets/ProvisionalLogo.png" alt="Logo Zira">
+  </a>
+  <span class="navs">
+      <h2>CDA - SENA CHIA</h2>
+  </span>
+  <div>
+      <img src="/assets/search.png" alt="Buscador">
+      <img  src="/assets/menu.png" alt="Menú" id="menuIcon">
+  </div>
 
 </nav>
+
+
+
+<div class="menu-container">
+  <div class="menu-content" id="menuContent">
+      <span>
+          <ul>
+              <a href="#">Programas</a>
+              <li><a href="#">Producción Multimedia</a></li>
+              <li><a href="#">Animación 3D</a></li>
+              <li><a href="#">Fotografía Y Procesos Digitales</a></li>
+              <li><a href="#">Analisis y Desarrollo de Sistemas de Información</a></li>
+              <li><a href="#">Sistemas</a></li>
+              <li><a href="#">Gestión de Redes de Datos</a></li>
+              <li><a href="#">Programación de Software</a></li>
+          </ul>
+          <ul>
+              <a href="#">Instructores</a>
+              <li><a href="#">Producción Multimedia</a></li>
+              <li><a href="#">Animación 3D</a></li>
+              <li><a href="#">Fotografía Y Procesos Digitales</a></li>
+              <li><a href="#">Analisis y Desarrollo de Sistemas de Información</a></li>
+              <li><a href="#">Sistemas</a></li>
+              <li><a href="#">Gestión de Redes de Datos</a></li>
+              <li><a href="#">Programación de Software</a></li>
+          </ul>
+          <ul>
+              <a href="#">Servicios CDA - SENA</a>
+              <li><a href="#">Fondo Emprender</a></li>
+              <li><a href="#">AgroSena</a></li>
+              <li><a href="#">Contrato de Aprendizaje</a></li>
+          </ul>
+          <ul>
+              <a href="#">Sobre Nosotros</a>
+              <li><a href="#">Desarrolladores</a></li>
+          </ul>
+      </span>
+  </div>
+</div>
+
+<script>
+    document.getElementById('menuIcon').addEventListener('click', function() {
+    var menuContent = document.getElementById('menuContent');
+
+    if (menuContent.style.display === "block") {
+        menuContent.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+        menuContent.style.transform = "translateY(-20px)";  
+        menuContent.style.opacity = 0;  
+        setTimeout(function() {
+            menuContent.style.display = "none";  
+        }, 300); 
+    } else {
+        menuContent.style.display = "block";
+        setTimeout(function() {
+            menuContent.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+            menuContent.style.transform = "translateY(0)";  
+            menuContent.style.opacity = 1;  
+        }, 10);  
+    }
+});
+</script>
+
 
 
 <style>
@@ -24,48 +86,100 @@
 
 
 
-nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 10vh;
-  width: 100%;
-  padding-top: 0.5em;
-
+  nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 10vh;
+      width: 100%;
+      padding-top: 0.5em;
+    
+    }
+    .navs{
+      background-color: #9037ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60em;
+      height: 5em;
+      border-radius: 1em;
+      margin-left: 3em;
+      color: white;
+    }
+    div{
+      display: flex;
+      width: 10em;
+      gap: 1em;
+      margin-right: 1em;
+    }
+    img{
+      width: 35%;	
+      cursor: pointer;
+    }
+    .Logo{
+      aspect-ratio: 1 / 1;
+      width: 75px;
+      height: 90px;
+      margin-left: 2.5em;
+      cursor: pointer;
+    }
+    .menu-container {
+    position: relative;
 }
 
-span{
-  background-color: #9037ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 60em;
-  height: 5em;
-  border-radius: 1em;
-  margin-left: 3em;
+.menu-icon {
+    cursor: pointer;
+    width: 40px; 
+    height: 40px;
+    display: block;
 }
 
-div{
-  display: flex;
-  width: 10em;
-  gap: 1em;
-  margin-right: 1em;
+.menu-content {
+    display: none;
+    background-color: #333;
+    color: white;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100vw;
+    opacity: 0; 
+    transform: translateY(-20px); 
 }
 
 
-img{
-  width: 35%;	
-  cursor: pointer;
+.menu-content span {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 20px;
 }
 
-.Logo{
-  aspect-ratio: 1 / 1;
-  width: 75px;
-  height: 90px;
-  margin-left: 2.5em;
-  cursor: pointer;
+.menu-content ul:nth-child(4){
+    margin-right: 21px;
 }
 
+.menu-content ul{
+    font-weight: bold;
+}
+
+.menu-content li {
+    margin: 10px 0;
+    font-weight: 300;
+}
+
+.menu-content a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-content.show {
+    display: block;
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
 
 </style>
