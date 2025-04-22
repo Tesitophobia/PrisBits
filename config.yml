@@ -1,0 +1,33 @@
+# Sitio básico
+title: "Prisbits"
+description: "Pagina Principal de Prisbits"
+baseurl: "" # Deja vacío si estás usando GitHub Pages en la raíz del repositorio
+url: "https://Tesitophobia.github.io" # Cambia esto por la URL de tu sitio
+
+# Tema
+theme: jekyll-theme-primer # Cambia esto si usas un tema diferente
+
+# Configuración de Markdown
+markdown: kramdown
+kramdown:
+  input: GFM # GitHub Flavored Markdown
+
+# Archivos para incluir/excluir
+include:
+  - ".htaccess"
+exclude:
+  - "node_modules"
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "README.md"
+  - "src/**/*.astro" # Excluye archivos .astro si no son compatibles
+
+# Plugins (si necesitas alguno)
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Configuración de GitHub Pages
+github:
+  is_project_page: true
