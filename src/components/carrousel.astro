@@ -1,0 +1,328 @@
+    <style>
+        /* 
+        * Contenedor principal del carrusel 
+        */
+        .carousel__container {
+            position: relative;
+            width: 1920px;
+            max-width: 100%;
+            padding: 0;
+        }
+
+        /* 
+        * Wrapper del carrusel 
+        */
+        .carousel__wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 0 60px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* 
+        * Track del carrusel 
+        */
+        .carousel__track {
+            display: flex;
+            transition: transform 0.5s ease;
+            gap: 30px;
+        }
+
+        /* 
+        * Tarjetas individuales con imagen y degradado 
+        */
+        .carousel__card {
+            flex: 0 0 400px;
+            height: 600px;
+            border-radius: 24px;
+            padding: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            margin-top: 10px;
+            will-change: transform;
+            transform-origin: center bottom;
+            
+            /* Fondo con imagen */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 
+        * Degradado sobre la imagen 
+        * Usando mix-blend-mode para mejor integración
+        */
+        .carousel__card::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top, 
+                rgba(128, 0, 255, 0.8) 0%, 
+                rgba(128, 0, 255, 0.6) 30%, 
+                rgba(128, 0, 255, 0.4) 60%,
+                rgba(128, 0, 255, 0.2) 100%
+            );
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 24px;
+            mix-blend-mode: multiply; /* Mezcla el degradado con la imagen */
+        }
+
+        /* Efecto hover en las tarjetas */
+        .carousel__card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(128, 0, 255, 0.4);
+            z-index: 10;
+        }
+
+        /* 
+        * Contenido de texto de la tarjeta 
+        */
+        .carousel__card-content {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Título de la tarjeta */
+        .carousel__card-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Enlace de la tarjeta */
+        .carousel__card-link {
+            display: inline-block;
+            background-color: #9500ff;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .carousel__card-link:hover {
+            background-color: #a928ff;
+            transform: scale(1.05);
+        }
+
+        /* Botones de navegación */
+        .carousel__button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(128, 0, 255, 0.3);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel__button:hover {
+            background-color: rgba(128, 0, 255, 0.6);
+        }
+
+        .carousel__button--prev {
+            left: 10px;
+        }
+
+        .carousel__button--next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor principal del carrusel -->
+    <div id="mainCarousel" class="carousel__container">
+        <!-- Botones de navegación -->
+        <button id="prevButton" class="carousel__button carousel__button--prev">&#10094;</button>
+        <button id="nextButton" class="carousel__button carousel__button--next">&#10095;</button>
+        
+        <div class="carousel__wrapper">
+            <!-- Track del carrusel donde se mueven las tarjetas -->
+            <div id="carouselTrack" class="carousel__track">
+                
+                <!-- Tarjeta 1: Producción -->
+                <div class="carousel__card" id="card1" style="background-image: url('https://source.unsplash.com/random/400x600?production');">
+                    <div class="carousel__card-content">
+                        <h2 class="carousel__card-title">Producción</h2>
+                        <a href="#" class="carousel__card-link">¡VER MÁS!</a>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 2: Animación -->
+                <div class="carousel__card" id="card2" style="background-image: url('https://source.unsplash.com/random/400x600?animation');">
+                    <div class="carousel__card-content">
+                        <h2 class="carousel__card-title">Animación</h2>
+                        <a href="#" class="carousel__card-link">¡VER MÁS!</a>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 3: Ingeniería -->
+                <div class="carousel__card" id="card3" style="background-image: url('https://source.unsplash.com/random/400x600?engineering');">
+                    <div class="carousel__card-content">
+                        <h2 class="carousel__card-title">Ingeniería</h2>
+                        <a href="#" class="carousel__card-link">¡VER MÁS!</a>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 4: Redes -->
+                <div class="carousel__card" id="card4" style="background-image: url('https://source.unsplash.com/random/400x600?network');">
+                    <div class="carousel__card-content">
+                        <h2 class="carousel__card-title">Redes</h2>
+                        <a href="#" class="carousel__card-link">¡VER MÁS!</a>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 5: Multimedia -->
+                <div class="carousel__card" id="card5" style="background-image: url('https://source.unsplash.com/random/400x600?multimedia');">
+                    <div class="carousel__card-content">
+                        <h2 class="carousel__card-title">Multimedia</h2>
+                        <a href="#" class="carousel__card-link">¡VER MÁS!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // El JavaScript permanece igual que en la versión anterior
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselTrack = document.getElementById('carouselTrack');
+            const cards = carouselTrack.querySelectorAll('.carousel__card');
+            const prevBtn = document.getElementById('prevButton');
+            const nextBtn = document.getElementById('nextButton');
+            
+            let currentPosition = 0;
+            const cardWidth = 430;
+            const maxPosition = (cards.length - 3) * cardWidth;
+            
+            currentPosition = cardWidth / 2;
+            carouselTrack.style.transform = `translateX(-${currentPosition}px)`;
+            
+            let isDragging = false;
+            let startPosition = 0;
+            let startX = 0;
+            
+            function moveCarousel(position) {
+                currentPosition = position;
+                
+                if (currentPosition < 0) currentPosition = 0;
+                if (currentPosition > maxPosition) currentPosition = maxPosition;
+                
+                carouselTrack.style.transform = `translateX(-${currentPosition}px)`;
+                
+                updateButtonStates();
+            }
+            
+            function updateButtonStates() {
+                prevBtn.disabled = currentPosition === 0;
+                nextBtn.disabled = currentPosition >= maxPosition;
+                
+                prevBtn.style.opacity = currentPosition === 0 ? '0.5' : '1';
+                nextBtn.style.opacity = currentPosition >= maxPosition ? '0.5' : '1';
+            }
+            
+            prevBtn.addEventListener('click', function() {
+                moveCarousel(currentPosition - cardWidth);
+            });
+            
+            nextBtn.addEventListener('click', function() {
+                moveCarousel(currentPosition + cardWidth);
+            });
+            
+            carouselTrack.addEventListener('mousedown', function(e) {
+                startDrag(e.clientX);
+            });
+            
+            document.addEventListener('mouseup', function(e) {
+                endDrag(e.clientX);
+            });
+            
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    drag(e.clientX);
+                }
+            });
+            
+            carouselTrack.addEventListener('touchstart', function(e) {
+                startDrag(e.touches[0].clientX);
+            });
+            
+            document.addEventListener('touchend', function(e) {
+                if (isDragging) {
+                    endDrag(e.changedTouches[0].clientX);
+                }
+            });
+            
+            document.addEventListener('touchmove', function(e) {
+                if (isDragging) {
+                    drag(e.touches[0].clientX);
+                    e.preventDefault();
+                }
+            });
+            
+            function startDrag(clientX) {
+                isDragging = true;
+                startPosition = currentPosition;
+                startX = clientX;
+                carouselTrack.style.cursor = 'grabbing';
+                carouselTrack.style.transition = 'none';
+            }
+            
+            function drag(clientX) {
+                const moved = startX - clientX;
+                moveCarousel(startPosition + moved);
+            }
+            
+            function endDrag(clientX) {
+                if (!isDragging) return;
+                
+                isDragging = false;
+                carouselTrack.style.cursor = 'grab';
+                carouselTrack.style.transition = 'transform 0.5s ease';
+                
+                const movedBy = startX - clientX;
+                
+                if (Math.abs(movedBy) > 50) {
+                    if (movedBy > 0) {
+                        moveCarousel(Math.ceil(currentPosition / cardWidth) * cardWidth);
+                    } else {
+                        moveCarousel(Math.floor(currentPosition / cardWidth) * cardWidth);
+                    }
+                } else {
+                    moveCarousel(Math.round(currentPosition / cardWidth) * cardWidth);
+                }
+            }
+            
+            updateButtonStates();
+            carouselTrack.style.cursor = 'grab';
+        });
+    </script>

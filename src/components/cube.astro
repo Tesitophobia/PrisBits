@@ -23,7 +23,7 @@ import PrincipalButton from '../components/PrincipalButton.astro';
 <section id="sc2">
     <span><h2>¿Qué es?</h2></span>
     <p>Informática Diseño y Desarrollo de Software es la red que conforma industrias creativas del SENA, de la Sede Chía, Cundinamarca; con el fin de preparar a los aprendices en diferente modalidad de aprendizaje, teniendo en cuenta sus gustos, hobbies y afinidad, para que puedan lograr sus metas académicas con la ayuda de instructores debidamente especializados en cada uno de los programas descritos en la red. </p>
-    <img src="src/assets/logoSena.svg" alt="Logo SENA">
+    <img class="sena" src="public/assets/logoSena.svg" alt="Logo SENA">
     <PrincipalButton></PrincipalButton>
 </section>
 
@@ -43,7 +43,7 @@ import PrincipalButton from '../components/PrincipalButton.astro';
     .PrincipalText{
 		display: flex;
 		align-items: center;
-        height: 87vh;
+        height: 80vh;
 	}
     
     span{
@@ -51,12 +51,12 @@ import PrincipalButton from '../components/PrincipalButton.astro';
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 28px;
-        width: 10em;
+        font-size: 24px;
+        width: 16em;
         height: 5em;
         border-radius: 1em;
         grid-area: t;
-        margin-left: 25%;
+        margin-left: 20%;
     }
     
     #sc2 {
@@ -67,24 +67,29 @@ import PrincipalButton from '../components/PrincipalButton.astro';
         grid-template-areas: "ne t ni"
                              "a a a"
                              "na l b";
-        grid-template-columns: 33em 33em 33em;
+        grid-template-columns: 40em 40em 40em;
         grid-template-rows: 17em 17em 17em;
         justify-content: center;
         align-items: center;
 
         p{
             grid-area: a;
-            width: 70%;
+            width: 55%;
             font-size: 24px;
-            margin-left: 15%;
+            margin-left: 24.4%;
         }
 
         img{
             grid-area: l;
         }
+
+        .sena{
+            width: 120px;
+            margin-left: 40%;
+        }
         .Principal{
             grid-area: b;
-            margin-left: 7em;
+            margin-left: 9em;
         }
     }
 	h1{
